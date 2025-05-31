@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+
+    .container {
+      max-width: 650px;
+      margin: auto;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 30px;
+    }
+
+    .header {
+      text-align: center;
+      border-bottom: 1px solid #e0e0e0;
+      padding-bottom: 20px;
+    }
+
+    .header img {
+      max-width: 150px;
+      margin-bottom: 10px;
+    }
+
+    .header h2 {
+      font-size: 22px;
+      color: #1a1a1a;
+      margin: 0;
+    }
+
+    .content {
+      padding: 20px 0;
+    }
+
+    .detail {
+      margin-bottom: 15px;
+      font-size: 15px;
+    }
+
+    .detail-label {
+      font-weight: bold;
+      display: inline-block;
+      width: 90px;
+      color: #555;
+    }
+
+    .message-block {
+      margin-top: 10px;
+      padding: 12px;
+      background-color: #f9f9f9;
+      border-left: 4px solid #0073e6;
+      font-size: 14px;
+      white-space: pre-wrap;
+    }
+
+    .footer {
+      border-top: 1px solid #e0e0e0;
+      margin-top: 30px;
+      padding-top: 15px;
+      font-size: 13px;
+      text-align: center;
+      color: #777;
+    }
+
+    .footer a {
+      color: #0073e6;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="https://i.ibb.co/vxK4Rmx/logo1.png" alt="Zee Security Logo">
+      <h2>New Message Received</h2>
+    </div>
+
+    <div class="content">
+      <div class="detail">
+        <span class="detail-label">Name:</span> {{ name }}
+      </div>
+      <div class="detail">
+        <span class="detail-label">Email:</span> {{ email }}
+      </div>
+      <div class="detail">
+        <span class="detail-label">Phone:</span> {{ phone }}
+      </div>
+      <div class="detail">
+        <span class="detail-label">Message:</span>
+        <div class="message-block">{{ message }}</div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>Zee Security Ltd<br>
+        50 Belfast Road, Lisburn, BT27 4AT<br>
+        Phone: +44 7309 200952<br>
+        <a href="https://www.zeesecurity.co.uk">www.zeesecurity.co.uk</a>
+      </p>
+      <p>This email was sent automatically from the contact form on our website.</p>
+    </div>
+  </div>
+</body>
+</html>
