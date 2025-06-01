@@ -1,0 +1,1 @@
+web: gunicorn zeesecurity_backend.wsgi

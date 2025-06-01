@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 # from decouple import config
 import os
+import dj_database_url
 
 
 # Correct BASE_DIR definition
@@ -46,9 +47,11 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',  # <-- Add this on top
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -66,8 +69,29 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
 
 
-CORS_ALLOW_ALL_ORIGINS = True 
+# OR restrict to specific domains (recommended for production)
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+     "http://localhost:3001",
+    # React dev server
+    "https://zeesecurity.uk.co",
+]
 
+# Ensure CSRF is handled properly (if needed)
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:3000",
+     "http://localhost:3001",
+    "https://https://zeesecurity.uk.co",
+]
+
+CORS_ALLOW_METHODS = [
+    "GET",
+    "POST",
+    "PUT",
+    "PATCH",
+    "DELETE",
+    "OPTIONS",
+]
 
 ROOT_URLCONF = 'zeesecurity_backend.urls'
 
@@ -93,12 +117,9 @@ WSGI_APPLICATION = 'zeesecurity_backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+DATABASES['default'] = dj_database_url.config(
+    default=os.environ.get('DATABASE_URL')
+)
 
 
 # Password validation
