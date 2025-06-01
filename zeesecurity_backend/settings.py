@@ -81,7 +81,7 @@ CORS_ALLOWED_ORIGINS = [
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
      "http://localhost:3001",
-    "https://https://zeesecurity.uk.co",
+    "https://zeesecurity.uk.co",
 ]
 
 CORS_ALLOW_METHODS = [
@@ -119,9 +119,9 @@ WSGI_APPLICATION = 'zeesecurity_backend.wsgi.application'
 
 DATABASES = {} 
 
-DATABASES['default'] = dj_database_url.config(
-    default=os.environ.get('DATABASE_URL')
-)
+DATABASES = {
+    'default': dj_database_url.config(default=config('DATABASE_URL'))
+}
 
 
 # Password validation

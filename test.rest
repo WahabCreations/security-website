@@ -1,0 +1,43 @@
+### Health Check or Root
+GET https://security-website-40zl.onrender.com/ HTTP/1.1
+
+###
+
+### Example: Get All Contacts
+GET https://security-website-40zl.onrender.com/api/contact/ HTTP/1.1
+Content-Type: application/json
+
+###
+
+### Example: Get Single Contact by ID
+GET https://security-website-40zl.onrender.com/api/contact/1/ HTTP/1.1
+Content-Type: application/json
+
+###
+
+### Example: Create New Contact
+POST https://security-website-40zl.onrender.com/api/contact/ HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "message": "Hello from test.rest"
+}
+
+###
+
+### Example: Update Contact
+PUT https://security-website-40zl.onrender.com/api/contact/1/ HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Updated Name",
+  "email": "updated@example.com",
+  "message": "Updated message"
+}
+
+###
+
+### Example: Delete Contact
+DELETE https://security-website-40zl.onrender.com/api/contact/1/ HTTP/1.1
