@@ -5,13 +5,18 @@ import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = config('SECRET_KEY', default='unsafe-key')  # Set securely in .env
+SECRET_KEY = config('SECRET_KEY', default='unsafe-key')
 
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['zeesecurity.onrender.com', 'www.zeesecurity.co.uk', 'zeesecurity.co.uk']
+# Add your backend domain and frontend domains here
+ALLOWED_HOSTS = [
+    'security-website-40zl.onrender.com',  # Your backend domain on Render
+    'zeesecurity.onrender.com',
+    'www.zeesecurity.co.uk',
+    'zeesecurity.co.uk',
+]
 
-# Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -29,11 +34,11 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',  # Must be at the top!
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -60,7 +65,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'zeesecurity_backend.wsgi.application'
 
-# Database
 DATABASES = {
     'default': dj_database_url.config(
         default=config('DATABASE_URL'),
@@ -69,7 +73,6 @@ DATABASES = {
     )
 }
 
-# Email settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = config('EMAIL_HOST')
 EMAIL_PORT = config('EMAIL_PORT', cast=int)
@@ -78,7 +81,6 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
 
-# Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -86,37 +88,39 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-# Internationalization
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# Static files
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# Media files (optional, if you use user uploads)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# CORS and CSRF
+# CORS and CSRF settings
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "http://localhost:3001",
-    "https://zeesecurity.co.uk",
+    "http://localhost:3000",            # for local frontend dev
+    "http://localhost:3001",            # if using another port locally
+    "https://zeesecurity.co.uk",       # your Hostinger frontend domain
     "https://www.zeesecurity.co.uk"
+    # If frontend is hosted elsewhere, add here:
 ]
+
+# If your frontend is on a subdomain or another domain, add it here
 
 CSRF_TRUSTED_ORIGINS = [
     "https://zeesecurity.co.uk",
     "https://www.zeesecurity.co.uk",
+    # Add backend URL if necessary (Render doesn't need it, but no harm)
+    "https://security-website-40zl.onrender.com",
+    # Add your frontend domain(s)
 ]
 
 CORS_ALLOW_METHODS = [
     "GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"
 ]
 
-# Default primary key field
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
